@@ -90,7 +90,6 @@ FILE *fp = fopen("vault.txt", "rb");
 					return;
 				}
 
-		       	
 	}
 	 printf("%s", spaces);
 	printf("Username/password does not match\n");
