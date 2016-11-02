@@ -87,6 +87,7 @@ FILE *fp = fopen("vault.txt", "rb");
 	while(fread(&search, sizeof(struct record), 1, fp) != 0){ 
 	if( strcmp(tempUserName, search.userName) == 0 && strcmp(tempPassword, search.password) == 0 ){			           				    			 printf("%s", spaces);
 					printf("Acccess Granted!\n");
+					system("./mainprogram");
 					return;
 				}
 
