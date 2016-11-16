@@ -171,6 +171,34 @@ void addNote(void)
 	printf("Note successfully added!\n\n");
 }
 
+void deleteNote()
+{
+	int day, month, year;
+	printf("Entet date in DD MM YYYY format: ");
+	scanf("%d %d %d", &day, &month, &year);
+
+	FILE *fp = fopen("notes.txt", "rb");
+	struct todo search;
+
+	while(fread(&search, sizeof(struct todo), 1, fp) != 0)
+	{ 	
+		FILE *new = fopen("notes.txt", "wb");
+
+
+		if( month == search.month && year == search.year && day == search.day )
+		{
+			// Do Nothing
+		}
+
+		else
+		{
+			fwrite(&search, sizeof(search), 1, new);
+		}
+	}
+	fclose(fp);
+
+}
+
 
 
 int main(void) {
@@ -200,7 +228,7 @@ navigate:
 	leapYear = checkLeapYear(year);
 	firstDayOfMonth = determineFirstDay(year, month);
 	printCalendar(firstDayOfMonth, month, year, leapYear);
-	printf("'n': Go to next month, 'p': Go to previous month, 'a': Add Note, 'q': quit \n");
+	printf("'n': Go to next month, 'p': Go to previous month, 'a': Add Note, 'd': delete note 'q': quit \n");
 	scanf(" %c", &choice);
 	switch(choice) {
 		case 'n': month = month + 1;
@@ -222,6 +250,10 @@ navigate:
 		case 'a': addNote();
 				goto navigate;
 				break;
+			
+		case 'd': deleteNote();
+					goto navigate;
+					break;
 
 		case 'q': return 0;
 
